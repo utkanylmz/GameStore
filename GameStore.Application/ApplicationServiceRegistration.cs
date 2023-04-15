@@ -6,6 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Application.Pipelines.Validation;
+using FluentValidation;
+using GameStore.Application.Features.Users.Rules;
 
 namespace GameStore.Application
 {
@@ -15,9 +18,10 @@ namespace GameStore.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            
+            services.AddScoped<UserBusinessRules>();
 
-           
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             return services;
         }
     }

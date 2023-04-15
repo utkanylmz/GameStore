@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameStore.Domain.Entities;
+using GameStore.Application.Features.Users.Rules;
 
 namespace GameStore.Application.Features.Users.Commands.CreateUser
 {
@@ -27,14 +28,17 @@ namespace GameStore.Application.Features.Users.Commands.CreateUser
         {
             private readonly IUserRepository _userRepositories;
             private readonly IMapper _mapper;
-
-            public CreateUserHandler(IUserRepository userRepositories, IMapper mapper)
+            private readonly UserBusinessRules _userBusinessRules;
+            public CreateUserHandler(IUserRepository userRepositories, IMapper mapper, 
+                UserBusinessRules userBusinessRules)
             {
                 _userRepositories = userRepositories;
                 _mapper = mapper;
+                _userBusinessRules = userBusinessRules;
             }
             public async Task<CreatedUserDto>Handle(CreateUserCommand request,CancellationToken cancellationToken)
             {
+                await _userBusinessRules.BrandNameCanNotBeDuplicatedWhenInserted(request.FirstName);
                 User mappedUser =new ()
                 {
                     FirstName= request.FirstName,
