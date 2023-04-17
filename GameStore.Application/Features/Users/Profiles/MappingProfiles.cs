@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Persistence.Paging;
+
 using GameStore.Application.Features.Users.Commands.CreateUser;
 using GameStore.Application.Features.Users.Commands.DeleteUser;
 using GameStore.Application.Features.Users.Commands.UpdateUser;

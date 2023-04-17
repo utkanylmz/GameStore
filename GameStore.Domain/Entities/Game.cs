@@ -21,6 +21,10 @@ namespace GameStore.Domain.Entities
 
         public ICollection<User> Users { get; set; }
 
+        public Game()
+        {
+            
+        }
 
         public Game(int id, string name, int gameTypeId, int gameDeveleporId,
            string platform, DateTime releaseDate, decimal price)

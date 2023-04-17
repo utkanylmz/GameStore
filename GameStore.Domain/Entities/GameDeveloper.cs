@@ -15,7 +15,10 @@ namespace GameStore.Domain.Entities
         public string DeveloperCompanyMail { get; set; }
         public string DeveloperCompanyCountry { get; set; }
         public ICollection<Game> Games { get; set; }
-
+        public GameDeveloper()
+        {
+            
+        }
         public GameDeveloper(int id,string developerCompanyName, string developerCompanyMail, 
             string developerCompanyCountry)
         {

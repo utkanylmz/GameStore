@@ -7,27 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\GameDeveloper\Commands\" />
-    <Folder Include="Features\GameDeveloper\Constants\" />
-    <Folder Include="Features\GameDeveloper\Dtos\" />
-    <Folder Include="Features\GameDeveloper\Models\" />
-    <Folder Include="Features\GameDeveloper\Profiles\" />
-    <Folder Include="Features\GameDeveloper\Queries\" />
-    <Folder Include="Features\GameDeveloper\Rules\" />
-    <Folder Include="Features\GameType\Commands\" />
-    <Folder Include="Features\GameType\Constants\" />
-    <Folder Include="Features\GameType\Dtos\" />
-    <Folder Include="Features\GameType\Models\" />
-    <Folder Include="Features\GameType\Rules\" />
-    <Folder Include="Features\GameType\Queries\" />
-    <Folder Include="Features\GameType\Profiles\" />
-    <Folder Include="Features\Game\Commands\" />
-    <Folder Include="Features\Game\Constants\" />
-    <Folder Include="Features\Game\Dtos\" />
-    <Folder Include="Features\Game\Models\" />
-    <Folder Include="Features\Game\Profiles\" />
-    <Folder Include="Features\Game\Queries\" />
-    <Folder Include="Features\Game\Rules\" />
+    <Folder Include="Features\GameDevelopers\Constants\" />
+    <Folder Include="Features\GameDevelopers\Rules\" />
+    <Folder Include="Features\Games\Constants\" />
+    <Folder Include="Features\Games\Rules\" />
+    <Folder Include="Features\GameTypes\Constants\" />
+    <Folder Include="Features\GameTypes\Rules\" />
     <Folder Include="Features\Users\Constants\" />
   </ItemGroup>
 

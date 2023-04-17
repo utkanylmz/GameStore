@@ -6,15 +6,11 @@ using GameStore.Application.Features.Users.Commands.UpdateUser;
 using GameStore.Application.Features.Users.Dtos.CreateUser;
 using GameStore.Application.Features.Users.Dtos.DeleteUser;
 using GameStore.Application.Features.Users.Dtos.GetByIdUser;
-using GameStore.Application.Features.Users.Dtos.GetListUser;
 using GameStore.Application.Features.Users.Dtos.UpdatedUser;
 using GameStore.Application.Features.Users.Models.UserListUser;
 using GameStore.Application.Features.Users.Queries.GetByIdUser;
 using GameStore.Application.Features.Users.Queries.GetListUser;
-using GameStore.Application.Services.Repositories;
-using GameStore.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameStore.WebAPI.Controllers
@@ -55,7 +51,7 @@ namespace GameStore.WebAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromRoute] DeleteUserCommand deleteUserCommand)
+        public async Task<IActionResult> Delete([FromQuery] DeleteUserCommand deleteUserCommand)
         {
             DeletedUserDto result= await Mediator.Send(deleteUserCommand); 
             return Ok(result);
