@@ -19,6 +19,9 @@ namespace GameStore.Domain.Entities
         
         public decimal Price { get; set; }
 
+        public virtual GameType? GameType { get; set; }
+        public virtual GameDeveloper? GameDeveloper { get; set; }
+
         public ICollection<User> Users { get; set; }
 
         public Game()
