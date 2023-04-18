@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameStore.Application.Features.GameTypes.Dtos.CreateDto;
+using GameStore.Application.Features.GameTypes.Rules;
 
 namespace GameStore.Application.Features.GameTypes.Commands.CreateGameType
 {
@@ -20,15 +21,19 @@ namespace GameStore.Application.Features.GameTypes.Commands.CreateGameType
         {
             private readonly IGameTypeRepository _gameTypeRepository;
             private readonly IMapper _mapper;
+            private readonly GameTypeBusinessRules _gameTypeBusinessRules;
 
-            public CreateGameTypeCommandHandler(IGameTypeRepository gameTypeRepository, IMapper mapper)
+            public CreateGameTypeCommandHandler(IGameTypeRepository gameTypeRepository, IMapper mapper, 
+                GameTypeBusinessRules gameTypeBusinessRules)
             {
                 _gameTypeRepository = gameTypeRepository;
                 _mapper = mapper;
+                _gameTypeBusinessRules = gameTypeBusinessRules;
             }
 
             public async Task<CreateGameTypeDto> Handle(CreateGameTypeCommand request, CancellationToken cancellationToken)
             {
+                await _gameTypeBusinessRules.GameTypeCanNotDublicateWhenInserted(request.TypeName);
                 GameType mappedGameType = _mapper.Map<GameType>(request);
                 GameType gameType= await _gameTypeRepository.AddAsync(mappedGameType);
                 CreateGameTypeDto createGameTypeDto=_mapper.Map<CreateGameTypeDto>(gameType);

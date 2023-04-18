@@ -16,5 +16,6 @@ namespace GameStore.Application.Features.Users.Dtos.GetListUser
         public string TelNumber { get; set; }
 
         public bool IsActive { get; set; }
+        public string NickName { get; set; }
     }
 }

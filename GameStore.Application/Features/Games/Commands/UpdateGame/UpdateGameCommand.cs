@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GameStore.Application.Features.Games.Dtos.UpdateDto;
+using GameStore.Application.Features.Games.Rules;
 using GameStore.Application.Services.Repositories;
 using GameStore.Domain.Entities;
 using MediatR;
@@ -24,15 +25,18 @@ namespace GameStore.Application.Features.Games.Commands.UpdateGame
         {
             private readonly IGameRepository _gameRepository;
             private readonly IMapper _mapper;
-
-            public UpdateGameCommandHandler(IGameRepository gameRepository, IMapper mapper)
+            private readonly GameBusinessRules _gameBusinessRules;
+            public UpdateGameCommandHandler(IGameRepository gameRepository, IMapper mapper,
+                GameBusinessRules gameBusinessRules = null)
             {
                 _gameRepository = gameRepository;
                 _mapper = mapper;
+                _gameBusinessRules = gameBusinessRules;
             }
 
             public async Task<UpdateGameDto> Handle(UpdateGameCommand request, CancellationToken cancellationToken)
             {
+                await _gameBusinessRules.GameNameCanNotBeDuplicatedWhenInserted(request.Name);
                 Game game = new()
                 {
                     Id = request.Id,

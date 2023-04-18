@@ -20,8 +20,9 @@ namespace GameStore.Application.Features.Users.Commands.CreateUser
         public string Email { get; set; }
         public string TelNumber { get; set; }
 
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public bool IsActive { get; set; }
+        public string NickName { get; set; }
 
 
         public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreatedUserDto>
@@ -38,7 +39,11 @@ namespace GameStore.Application.Features.Users.Commands.CreateUser
             }
             public async Task<CreatedUserDto>Handle(CreateUserCommand request,CancellationToken cancellationToken)
             {
-                await _userBusinessRules.BrandNameCanNotBeDuplicatedWhenInserted(request.FirstName);
+                await _userBusinessRules.UserTelNumberCanNotBeDuplicatedWhenInserted(request.TelNumber);
+                await _userBusinessRules.UserMustBeOver18YearsOdlWhenInserted(request.BirthDate);
+                await _userBusinessRules.UserEmailCanNotBeDuplicatedWhenInserted(request.Email);
+                await _userBusinessRules.UserTelNumberCanNotBeDuplicatedWhenInserted(request.TelNumber);
+
                 User mappedUser =new ()
                 {
                     FirstName= request.FirstName,
@@ -46,7 +51,8 @@ namespace GameStore.Application.Features.Users.Commands.CreateUser
                     Email= request.Email,
                     TelNumber= request.TelNumber,
                     IsActive= request.IsActive,
-                    BirthDate=DateTime.Parse(request.BirthDate)
+                    BirthDate=Convert.ToDateTime(request.BirthDate),
+                    NickName=request.NickName
                 };
                 User createdUser = await _userRepositories.AddAsync(mappedUser);
                 CreatedUserDto createdUserDto=_mapper.Map<CreatedUserDto>(createdUser);

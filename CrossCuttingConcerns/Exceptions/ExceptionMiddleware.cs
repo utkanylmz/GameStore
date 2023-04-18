@@ -14,15 +14,15 @@ namespace CrossCuttingConcerns.Exceptions
 {
     public class ExceptionMiddleware
     {
-        //ExceptionMiddleware sınıfı .Nette istek işlenirken oluşan exceptionları yakalar.İstemciye döndürülecek
-        //Responsu özleştirmeyi sağlar.
+        //ExceptionMiddleware sinifi .Nette istek islenirken olusan exceptionlari yakalar.İstemciye dondurulecek
+        //Responsu ozlestirmeyi saglar.
         private readonly RequestDelegate _next;
 
         public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
         }
-        //Http isteğiçalıştırılır Eğer hata varsa HandleExceptionAsync metodu çalıştırılır.
+        //Http istegi calistirilir Eger hata varsa HandleExceptionAsync metodu calistirilir.
         public async Task Invoke(HttpContext context)
         {
             try
@@ -34,8 +34,8 @@ namespace CrossCuttingConcerns.Exceptions
                 await HandleExceptionAsync(context, exception);
             }
         }
-        //Eğer hata türü ValidasyonException,BusinessException,AuthorizationException ise bu hata türlerine uygun
-        //Hata döndürüreğer değilse dahili bir hata türü döndürür.
+        //Eger hata turu ValidasyonException,BusinessException,AuthorizationException ise bu hata turlerine uygun
+        //Hata dondurur eger degilse dahili bir hata turu dondurur.
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
@@ -58,7 +58,7 @@ namespace CrossCuttingConcerns.Exceptions
                 Title = "Authorization exception",
                 Detail = exception.Message,
                 Instance = ""
-            } .ToString());
+            }.ToString());
         }
 
         private Task CreateBusinessException(HttpContext context, Exception exception)
@@ -72,7 +72,7 @@ namespace CrossCuttingConcerns.Exceptions
                 Title = "Business exception",
                 Detail = exception.Message,
                 Instance = ""
-            } .ToString());
+            }.ToString());
         }
 
         private Task CreateValidationException(HttpContext context, Exception exception)
@@ -88,7 +88,7 @@ namespace CrossCuttingConcerns.Exceptions
                 Detail = "",
                 Instance = "",
                 Errors = errors
-            } .ToString());
+            }.ToString());
         }
 
         private Task CreateInternalException(HttpContext context, Exception exception)
@@ -102,7 +102,7 @@ namespace CrossCuttingConcerns.Exceptions
                 Title = "Internal exception",
                 Detail = exception.Message,
                 Instance = ""
-            } .ToString());
+            }.ToString());
         }
     }
 }

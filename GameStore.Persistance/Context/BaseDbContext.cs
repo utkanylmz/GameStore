@@ -71,6 +71,7 @@ namespace GameStore.Persistance.Context
                 user.Property(cl => cl.TelNumber).HasColumnName("TelNumber");
                 user.Property(cl => cl.BirthDate).HasColumnName("BirthDate");
                 user.Property(cl => cl.IsActive).HasColumnName("Status");
+                user.Property(cl=>cl.NickName).HasColumnName("NickNames");
 
             });
 
@@ -102,8 +103,8 @@ namespace GameStore.Persistance.Context
 
             User[] userEntitySeeds =
             {
-                new(1,"Utkan","Yılmaz","Utkan@utkan.gmail.com",DateTime.Now,"0545545545",true),
-                new(2,"Hasan","Sanık","Hasan@sanık.gmail.com",DateTime.Now,"0532532532",true),
+                new(1,"Utkan","Yılmaz","Utkan@utkan.gmail.com",DateTime.Now,"0545545545",true,"utkanylmz"),
+                new(2,"Hasan","Sanık","Hasan@sanık.gmail.com",DateTime.Now,"0532532532",true,"HsnSnk"),
             };
             modelBuilder.Entity<User>().HasData(userEntitySeeds);
         }

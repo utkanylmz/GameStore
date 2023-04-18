@@ -17,6 +17,7 @@ namespace GameStore.Application.Features.Users.Dtos.CreateUser
 
         public DateTime BirtDate { get; set; }
         public bool IsActive { get; set; }
+        public string NickName { get; set; }
 
     }
 }

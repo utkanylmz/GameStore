@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GameStore.Application.Features.Users.Dtos.DeleteUser;
+using GameStore.Application.Features.Users.Rules;
 using GameStore.Application.Services.Repositories;
 using GameStore.Domain.Entities;
 using MediatR;
@@ -21,15 +22,17 @@ namespace GameStore.Application.Features.Users.Commands.DeleteUser
         {
             private readonly IUserRepository _userRepository;
             private readonly IMapper _mapper;
-
-            public DeleteUserHandler(IUserRepository userRepository, IMapper mapper)
+            private readonly UserBusinessRules _userBusinessRules;
+            public DeleteUserHandler(IUserRepository userRepository, IMapper mapper, UserBusinessRules userBusinessRules)
             {
                 _userRepository = userRepository;
                 _mapper = mapper;
+                _userBusinessRules = userBusinessRules;
             }
 
             public async Task<DeletedUserDto> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
             {
+                await _userBusinessRules.CurrentIdInfoCheck(request.Id);
 
                 User mappedUser = await _userRepository.GetAsync(user => user.Id == request.Id);
                 User user = await _userRepository.DeleteAsync( mappedUser);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GameStore.Application.Features.GameDevelopers.Dtos.CreateDtos;
+using GameStore.Application.Features.GameDevelopers.Rules;
 using GameStore.Application.Services.Repositories;
 using GameStore.Domain.Entities;
 using MediatR;
@@ -21,15 +22,21 @@ namespace GameStore.Application.Features.GameDevelopers.Commands.CreateGameDevel
         {
             private readonly IGameDeveloperRepository _gameDeveloperRepository;
             private readonly IMapper _mapper;
+            private readonly GameDeveloperBusinessRules _gameDeveloperBusinessRules;
 
-            public CreateGameDeveloperCommandHandler(IGameDeveloperRepository gameDeveloperRepository, IMapper mapper)
+            public CreateGameDeveloperCommandHandler(IGameDeveloperRepository gameDeveloperRepository, IMapper mapper,
+                GameDeveloperBusinessRules gameDeveloperBusinessRules = null)
             {
                 _gameDeveloperRepository = gameDeveloperRepository;
                 _mapper = mapper;
+                _gameDeveloperBusinessRules = gameDeveloperBusinessRules;
             }
 
             public async Task<CreateGameDeveloperDto> Handle(CreateGameDeveloperCommand request, CancellationToken cancellationToken)
             {
+                await _gameDeveloperBusinessRules.GameDeveloperComponyNameCanNotBeDuplicatedWhenInserted(request.DeveloperCompanyName);
+                await _gameDeveloperBusinessRules.GameDeveloperComponyMailCanNotBeDuplicatedWhenInserted(request.DeveloperCompanyMail);
+                await _gameDeveloperBusinessRules.GameDeveloperComponyCountryCanNotBeDuplicatedWhenInserted(request.DeveloperCompanyCountry);
                GameDeveloper mappedGameDeveloper=_mapper.Map<GameDeveloper>(request);
                 GameDeveloper gameDeveloper=await _gameDeveloperRepository.AddAsync(mappedGameDeveloper);
                 CreateGameDeveloperDto createGameDeveloperDto=_mapper.Map<CreateGameDeveloperDto>(gameDeveloper);

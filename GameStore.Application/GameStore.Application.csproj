@@ -8,11 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Features\GameDevelopers\Constants\" />
-    <Folder Include="Features\GameDevelopers\Rules\" />
     <Folder Include="Features\Games\Constants\" />
-    <Folder Include="Features\Games\Rules\" />
     <Folder Include="Features\GameTypes\Constants\" />
-    <Folder Include="Features\GameTypes\Rules\" />
     <Folder Include="Features\Users\Constants\" />
   </ItemGroup>
 

@@ -16,7 +16,7 @@ namespace GameStore.Domain.Entities
         public string TelNumber { get; set; }
       
         public bool IsActive { get; set; }
-
+        public string NickName { get; set; }
         public ICollection<Game> Games { get; set; }
 
         public User()
@@ -24,7 +24,7 @@ namespace GameStore.Domain.Entities
             
         }
         public User(int id ,string firstName, string lastName, string email,
-            DateTime birthDate, string telNumber, bool isActive)
+            DateTime birthDate, string telNumber, bool isActive,string nickName)
         {
             Id = id;
             FirstName = firstName;
@@ -33,6 +33,7 @@ namespace GameStore.Domain.Entities
             BirthDate = birthDate;
             TelNumber = telNumber;
             IsActive = isActive;
+            NickName = nickName;
         }
     }
 }
