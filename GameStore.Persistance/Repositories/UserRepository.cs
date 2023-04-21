@@ -1,4 +1,5 @@
 ﻿using Core.Persistence.Repositories;
+using Core.Security.Entities;
 using GameStore.Application.Services.Repositories;
 using GameStore.Domain.Entities;
 using GameStore.Persistance.Context;

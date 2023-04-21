@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence", "Core\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "Core.Application\Core.Application.csproj", "{53433FB3-FA92-4BF7-B9FB-B965C841CF9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossCuttingConcerns", "CrossCuttingConcerns\CrossCuttingConcerns.csproj", "{372424CD-FC80-4A0B-A23B-0543143109BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCuttingConcerns", "CrossCuttingConcerns\CrossCuttingConcerns.csproj", "{372424CD-FC80-4A0B-A23B-0543143109BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Security", "Core.Security\Core.Security.csproj", "{07911015-6F3A-4F84-92AC-41D88BF9687A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{372424CD-FC80-4A0B-A23B-0543143109BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{372424CD-FC80-4A0B-A23B-0543143109BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{372424CD-FC80-4A0B-A23B-0543143109BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07911015-6F3A-4F84-92AC-41D88BF9687A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07911015-6F3A-4F84-92AC-41D88BF9687A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07911015-6F3A-4F84-92AC-41D88BF9687A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07911015-6F3A-4F84-92AC-41D88BF9687A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{09E4B7BE-9287-456C-91E1-BBDDE0F04C87} = {BC3F50DF-E5F9-4C40-B9B3-D2167EB9946E}
 		{53433FB3-FA92-4BF7-B9FB-B965C841CF9B} = {BC3F50DF-E5F9-4C40-B9B3-D2167EB9946E}
 		{372424CD-FC80-4A0B-A23B-0543143109BD} = {BC3F50DF-E5F9-4C40-B9B3-D2167EB9946E}
+		{07911015-6F3A-4F84-92AC-41D88BF9687A} = {BC3F50DF-E5F9-4C40-B9B3-D2167EB9946E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FACD17F2-EF8D-4E7B-87DC-E47C2EC6EC39}

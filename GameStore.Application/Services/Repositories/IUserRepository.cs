@@ -1,4 +1,5 @@
 ﻿using Core.Persistence.Repositories;
+using Core.Security.Entities;
 using GameStore.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,4 +12,5 @@ namespace GameStore.Application.Services.Repositories
     public interface IUserRepository:IAsyncRepository<User>,IRepository<User>
     {
     }
+
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Application;
+using Core.Security.Entities;
 using GameStore.Application.Features.Users.Dtos.GetByIdUser;
 using GameStore.Application.Features.Users.Rules;
 using GameStore.Application.Services.Repositories;

@@ -3,6 +3,7 @@ using Core.Application;
 using Core.Application.Request;
 using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
+using Core.Security.Entities;
 using GameStore.Application.Features.Users.Models.UserListUser;
 using GameStore.Application.Services.Repositories;
 using GameStore.Domain.Entities;

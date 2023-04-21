@@ -1,4 +1,5 @@
 ﻿using Core.Persistence.Paging;
+using Core.Security.Entities;
 using CrossCuttingConcerns.Exceptions;
 using GameStore.Application.Services.Repositories;
 using GameStore.Domain.Entities;

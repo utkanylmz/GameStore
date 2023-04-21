@@ -1,8 +1,10 @@
-﻿using GameStore.Domain.Entities;
+﻿using Core.Security.Entities;
+using GameStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,12 @@ namespace GameStore.Persistance.Context
         public DbSet<Game> Games { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<GameDeveloper> GameDevelopers { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<GameType> GameTypes { get; set; }
+
+
 
         public BaseDbContext(DbContextOptions dbContextOptions,IConfiguration configuration):base(dbContextOptions)
         {
@@ -71,10 +78,14 @@ namespace GameStore.Persistance.Context
                 user.Property(cl => cl.TelNumber).HasColumnName("TelNumber");
                 user.Property(cl => cl.BirthDate).HasColumnName("BirthDate");
                 user.Property(cl => cl.IsActive).HasColumnName("Status");
-                user.Property(cl=>cl.NickName).HasColumnName("NickNames");
+                user.Property(cl=>cl.NickName).HasColumnName("NickName");
+                user.Property(cl=>cl.PasswordHash).HasColumnName("PasswordHash");
+                user.Property(cl=>cl.PasswordSalt).HasColumnName("PasswordSalt");
+                
 
             });
 
+           
 
            
             GameDeveloper[] gameDeveloperEntitySeeds =
@@ -101,12 +112,12 @@ namespace GameStore.Persistance.Context
 
 
 
-            User[] userEntitySeeds =
-            {
-                new(1,"Utkan","Yılmaz","Utkan@utkan.gmail.com",DateTime.Now,"0545545545",true,"utkanylmz"),
-                new(2,"Hasan","Sanık","Hasan@sanık.gmail.com",DateTime.Now,"0532532532",true,"HsnSnk"),
-            };
-            modelBuilder.Entity<User>().HasData(userEntitySeeds);
+            //User[] userEntitySeeds =
+            //{
+            //    new(1,"Utkan","Yılmaz","Utkan@utkan.gmail.com",DateTime.Now,"0545545545",true,"utkanylmz"),
+            //    new(2,"Hasan","Sanık","Hasan@sanık.gmail.com",DateTime.Now,"0532532532",true,"HsnSnk"),
+            //};
+            //modelBuilder.Entity<User>().HasData(userEntitySeeds);
         }
     }
 }

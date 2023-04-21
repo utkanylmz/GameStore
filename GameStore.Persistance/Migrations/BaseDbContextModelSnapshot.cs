@@ -77,7 +77,7 @@ namespace GameStore.Persistance.Migrations
                             Name = "Cs Go",
                             Platform = "Pc",
                             Price = 120m,
-                            ReleaseDate = new DateTime(2023, 4, 18, 14, 0, 20, 424, DateTimeKind.Local).AddTicks(5125)
+                            ReleaseDate = new DateTime(2023, 4, 19, 17, 40, 56, 276, DateTimeKind.Local).AddTicks(9567)
                         },
                         new
                         {
@@ -87,7 +87,7 @@ namespace GameStore.Persistance.Migrations
                             Name = "Fifa",
                             Platform = "Pc/Console",
                             Price = 600m,
-                            ReleaseDate = new DateTime(2023, 4, 18, 14, 0, 20, 424, DateTimeKind.Local).AddTicks(5143)
+                            ReleaseDate = new DateTime(2023, 4, 19, 17, 40, 56, 276, DateTimeKind.Local).AddTicks(9586)
                         });
                 });
 
@@ -174,6 +174,67 @@ namespace GameStore.Persistance.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GameStore.Domain.Entities.OperationClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OperationClaims");
+                });
+
+            modelBuilder.Entity("GameStore.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedByIp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReasonRevoked")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReplacedByToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Revoked")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RevokedByIp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("GameStore.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -209,7 +270,17 @@ namespace GameStore.Persistance.Migrations
                     b.Property<string>("NickName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("NickNames");
+                        .HasColumnName("NickName");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("PasswordHash");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("PasswordSalt");
 
                     b.Property<string>("TelNumber")
                         .IsRequired()
@@ -219,30 +290,29 @@ namespace GameStore.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users", (string)null);
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BirthDate = new DateTime(2023, 4, 18, 14, 0, 20, 424, DateTimeKind.Local).AddTicks(5159),
-                            Email = "Utkan@utkan.gmail.com",
-                            FirstName = "Utkan",
-                            IsActive = true,
-                            LastName = "Yılmaz",
-                            NickName = "utkanylmz",
-                            TelNumber = "0545545545"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BirthDate = new DateTime(2023, 4, 18, 14, 0, 20, 424, DateTimeKind.Local).AddTicks(5168),
-                            Email = "Hasan@sanık.gmail.com",
-                            FirstName = "Hasan",
-                            IsActive = true,
-                            LastName = "Sanık",
-                            NickName = "HsnSnk",
-                            TelNumber = "0532532532"
-                        });
+            modelBuilder.Entity("GameStore.Domain.Entities.UserOperationClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OperationClaimId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OperationClaimId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserOperationClaims");
                 });
 
             modelBuilder.Entity("GameUser", b =>
@@ -277,6 +347,36 @@ namespace GameStore.Persistance.Migrations
                     b.Navigation("GameType");
                 });
 
+            modelBuilder.Entity("GameStore.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("GameStore.Domain.Entities.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GameStore.Domain.Entities.UserOperationClaim", b =>
+                {
+                    b.HasOne("GameStore.Domain.Entities.OperationClaim", "OperationClaim")
+                        .WithMany()
+                        .HasForeignKey("OperationClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GameStore.Domain.Entities.User", "User")
+                        .WithMany("UserOperationClaims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OperationClaim");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GameUser", b =>
                 {
                     b.HasOne("GameStore.Domain.Entities.Game", null)
@@ -300,6 +400,13 @@ namespace GameStore.Persistance.Migrations
             modelBuilder.Entity("GameStore.Domain.Entities.GameType", b =>
                 {
                     b.Navigation("Games");
+                });
+
+            modelBuilder.Entity("GameStore.Domain.Entities.User", b =>
+                {
+                    b.Navigation("RefreshTokens");
+
+                    b.Navigation("UserOperationClaims");
                 });
 #pragma warning restore 612, 618
         }

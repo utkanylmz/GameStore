@@ -23,6 +23,13 @@
     <ProjectReference Include="..\Core.Application\Core.Application.csproj" />
     <ProjectReference Include="..\CrossCuttingConcerns\CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\GameStore.Domain\GameStore.Domain.csproj" />
+    <ProjectReference Include="..\GameStore.Infrastructure\GameStore.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Core.Persistence">
+      <HintPath>..\Core\Core.Persistence\obj\Debug\net7.0\ref\Core.Persistence.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

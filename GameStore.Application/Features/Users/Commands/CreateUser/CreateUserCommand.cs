@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameStore.Domain.Entities;
 using GameStore.Application.Features.Users.Rules;
+using Core.Security.Entities;
 
 namespace GameStore.Application.Features.Users.Commands.CreateUser
 {

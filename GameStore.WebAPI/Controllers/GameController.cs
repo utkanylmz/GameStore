@@ -19,10 +19,9 @@ namespace GameStore.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GameController : ControllerBase
+    public class GameController : BaseController
     {
-        protected IMediator? Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
-        private IMediator? _mediator;
+       
 
         [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)

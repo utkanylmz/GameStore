@@ -22,7 +22,7 @@ namespace GameStore.Domain.Entities
         public virtual GameType? GameType { get; set; }
         public virtual GameDeveloper? GameDeveloper { get; set; }
 
-        public ICollection<User> Users { get; set; }
+       
 
         public Game()
         {

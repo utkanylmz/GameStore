@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Security.Entities;
 using GameStore.Application.Features.Users.Dtos.UpdatedUser;
 using GameStore.Application.Services.Repositories;
 using GameStore.Domain.Entities;
