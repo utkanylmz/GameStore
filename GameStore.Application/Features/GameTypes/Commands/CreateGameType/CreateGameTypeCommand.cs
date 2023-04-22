@@ -9,10 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GameStore.Application.Features.GameTypes.Dtos.CreateDto;
 using GameStore.Application.Features.GameTypes.Rules;
+using Core.Application.Pipelines.Logging;
 
 namespace GameStore.Application.Features.GameTypes.Commands.CreateGameType
 {
-    public class CreateGameTypeCommand:IRequest<CreateGameTypeDto>
+    public class CreateGameTypeCommand:IRequest<CreateGameTypeDto>, ILoggableRequest
     {
         public string TypeName { get; set; }
         public string TypeDescription { get; set; }

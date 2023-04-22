@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Logging;
 using GameStore.Application.Features.Games.Dtos.CreateDto;
 using GameStore.Application.Features.Games.Dtos.DeleteDto;
 using GameStore.Application.Features.Games.Rules;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace GameStore.Application.Features.Games.Commands.CreateGame
 {
-    public class CreateGameCommand:IRequest<CreateGameDto>
+    public class CreateGameCommand:IRequest<CreateGameDto>,ILoggableRequest
     {
       
         public string Name { get; set; }

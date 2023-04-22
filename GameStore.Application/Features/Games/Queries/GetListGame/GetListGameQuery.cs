@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Logging;
 using Core.Application.Request;
 using Core.Persistence.Paging;
 using GameStore.Application.Features.Games.Models;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace GameStore.Application.Features.Games.Queries.GetListGame
 {
-    public class GetListGameQuery:IRequest<GetListGameModel>
+    public class GetListGameQuery:IRequest<GetListGameModel>,ILoggableRequest
     {
         public PageRequest PageRequest { get; set; }
         public class GetListGameQueryHandler : IRequestHandler<GetListGameQuery, GetListGameModel>
