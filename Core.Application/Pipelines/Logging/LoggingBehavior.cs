@@ -40,6 +40,7 @@ namespace Core.Application.Pipelines.Logging
                 };
 
             _loggerServiceBase.Info(JsonSerializer.Serialize(logDetail));
+           
             return await next();
         }
     }

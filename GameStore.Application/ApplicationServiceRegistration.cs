@@ -18,6 +18,7 @@ using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Logging;
 using CrossCuttingConcerns.Logging.Serilog;
 using CrossCuttingConcerns.Logging.Serilog.Logger;
+using Core.Application.Pipelines.Caching;
 
 namespace GameStore.Application
 {
@@ -38,6 +39,8 @@ namespace GameStore.Application
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
 
             services.AddScoped<IAuthService, AuthManager>();
             return services;

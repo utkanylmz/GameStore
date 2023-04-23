@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using GameStore.Application.Features.Games.Dtos.CreateDto;
 using GameStore.Application.Features.Games.Dtos.DeleteDto;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace GameStore.Application.Features.Games.Commands.CreateGame
 {
-    public class CreateGameCommand:IRequest<CreateGameDto>,ILoggableRequest
+    public class CreateGameCommand:IRequest<CreateGameDto>,ILoggableRequest,ICacheRemoverRequest
     {
       
         public string Name { get; set; }
@@ -23,6 +24,13 @@ namespace GameStore.Application.Features.Games.Commands.CreateGame
         public string Platform { get; set; }
         public DateTime ReleaseDate { get; set; }
         public decimal Price { get; set; }
+
+        public bool BypassCache { get; }
+
+        public string? CacheKey { get;  }
+
+        public string? CacheGroupKey => "GetGames";
+
         public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, CreateGameDto>
         {
             private readonly IGameRepository _gameRepository;

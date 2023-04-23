@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Request;
 using Core.Persistence.Paging;
@@ -15,10 +16,19 @@ using System.Threading.Tasks;
 
 namespace GameStore.Application.Features.Games.Queries.GetListGame
 {
-    public class GetListGameQuery:IRequest<GetListGameModel>,ILoggableRequest
+    public class GetListGameQuery:IRequest<GetListGameModel>,ILoggableRequest,ICachableRequest
     {
         public PageRequest PageRequest { get; set; }
-        public class GetListGameQueryHandler : IRequestHandler<GetListGameQuery, GetListGameModel>
+
+        public bool BypassCache { get;  }
+
+        public string CacheKey => $"GetListGames({PageRequest.Page},{PageRequest.PageSize})";
+
+        public string? CacheGroupKey => "GetGames";
+
+        public TimeSpan? SlidingExpiration { get; }
+
+    public class GetListGameQueryHandler : IRequestHandler<GetListGameQuery, GetListGameModel>
         {
             private readonly IGameRepository _gameRepository;
             private readonly IMapper _mapper;
