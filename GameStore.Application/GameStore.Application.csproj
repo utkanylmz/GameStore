@@ -10,6 +10,10 @@
     <Folder Include="Features\GameDevelopers\Constants\" />
     <Folder Include="Features\Games\Constants\" />
     <Folder Include="Features\GameTypes\Constants\" />
+    <Folder Include="Features\OperationClaims\Constants\" />
+    <Folder Include="Features\OperationClaims\Rules\" />
+    <Folder Include="Features\UserOperationClaims\Constants\" />
+    <Folder Include="Features\UserOperationClaims\Rules\" />
     <Folder Include="Features\Users\Constants\" />
   </ItemGroup>
 
